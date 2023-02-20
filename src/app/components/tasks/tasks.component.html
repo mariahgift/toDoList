@@ -1,0 +1,17 @@
+<div *ngFor="let task of tasks">
+    <div *ngIf="!(hideSelected&&task.isChecked)">
+        <input type="checkbox" [(ngModel)]="task.isChecked">
+        <label [ngClass]="{'completed': task.isChecked}">{{task.title}}</label>
+    </div>
+</div> 
+<br>
+
+<div>
+    <input type="text" [(ngModel)]="newTaskTitle">
+    <button (click)="addTask()">Add Task</button>
+</div> 
+
+<br>
+<div>
+    <button (click)="onClickToggle()">Show/Hide Completed Tasks</button>
+</div>
