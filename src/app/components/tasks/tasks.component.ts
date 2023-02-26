@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Task } from 'src/app/model/taskModel/task';
+import { TaskService } from 'src/app/task.service';
+
 import { TASKS } from '../../model/taskModel/sampletasks';
 // import { Task } from '../task';
 
@@ -9,16 +12,15 @@ import { TASKS } from '../../model/taskModel/sampletasks';
 })
 
 export class TasksComponent {
-
-  tasks = TASKS;
-
+  tasks:  Task[] = [];
   hideSelected = false;
 
-  newTaskTitle = '';
+  constructor(private taskService: TaskService) { }
 
-  addTask() {
-    this.tasks.push({title: this.newTaskTitle, isChecked: false});
-    this.newTaskTitle = '';
+  ngOnInit() {
+    this.taskService.getTasks().subscribe(tasks => {
+      this.tasks = tasks;
+    })
   }
 
   onClickToggle() {
